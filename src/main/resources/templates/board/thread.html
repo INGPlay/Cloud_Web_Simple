@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thread</title>
+
+    <link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">제목</th>
+                <th scope="col">내용</th>
+                <th scope="col">기타</th>
+            </tr>
+            </thead>
+            <tbody id="thread">
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+
+<script>
+    loadThreadListTo("thread")
+
+    function loadThreadListTo(target) {
+        $.ajax({
+            url: "/api/board",
+            method: "GET",
+            contentType: "application/json"
+        })
+        .done(response => {
+
+            let postHtml = ''
+            response.forEach(r => {
+                postHtml += ' \
+                    <tr onclick = "location.href=\'/board/ ' + r["id"] + '\'"> \
+                        <th scope="row">' + r["id"] + '</th> \
+                        <td>' + r["title"] + '</td> \
+                        <td>' + r["content"] + '</td> \
+                        <td></td> \
+                    </tr> \
+                '
+            });
+
+            document.getElementById(target).innerHTML = postHtml
+
+        })
+        .fail(error => {
+            alert("Error")
+        })
+    }
+</script>
+
+</html>
