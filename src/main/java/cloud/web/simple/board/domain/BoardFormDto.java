@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class SearchBoardDto {
+public class BoardFormDto {
     private String title;
     private String content;
 }

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write Post</title>
+
+    <th:bloc th:replace="layout/view::view"></th:bloc>
+</head>
+
+<body>
+    <div class="container">
+        <form id="postForm">
+
+            <div class="mb-3">
+                <input type="text" class="form-control" id="postTitle" name="title" placeholder="제목">
+            </div>
+        
+            <div class="mb-3">
+                <textarea class="form-control" id="postContent" rows="20" form="postForm" name="content"></textarea>
+            </div>
+
+            <div th:if = "${id != null}">
+                <input type="hidden" name="id" th:value="${id}">
+            </div>
+        </form>
+
+        <div>
+            <button type="button" class="btn btn-outline-dark" id="submitButton" onclick="clickEvent.clickSubmitButton()">작성</button>
+        </div>
+
+    </div>
+
+</body>
+
+<script th:inline="javascript">
+
+    isUpdate = /*[[${id}]]*/ !== null
+
+    if (isUpdate){
+        renderPost();
+        renderUpdateView();
+    }
+    
+
+    function renderPost(){
+
+        let url = "/api/board/" + /*[[${id}]]*/;
+
+        $.ajax({
+            url: url,
+            method: "GET",
+            contentType: "application/json"
+        })
+        .done(response => {
+
+            renderText("postTitle", response["title"])
+            renderText("postContent", response["content"])
+
+        })
+        .fail(error => {
+            alert(error["responseJSON"]["message"])
+        })
+    }
+
+    function renderUpdateView(){
+        document.getElementById("submitButton").innerHTML = "수정"
+    }
+
+    function renderText(target, text){
+        
+        targetDocument = document.getElementById(target)
+
+        if (targetDocument.tagName === "INPUT"){
+            targetDocument.value = text
+
+        } else {
+            targetDocument.innerHTML = text
+        }
+    }
+
+    class clickEvent {
+
+        static clickSubmitButton(){
+
+            var data = {};
+            $("#postForm").serializeArray().forEach(function(value, index){
+
+                data[value["name"]] = value["value"];
+            });
+            let method = isUpdate ? "PUT" : "POST"
+
+            $.ajax({
+                url : "/api/board",
+                method: method,
+                data : JSON.stringify(data),
+                dataType : "json",
+                contentType : "application/json"
+            })
+            .done(response => {
+                location.href = "/board"
+            })
+            .fail(error => {
+                alert(error["responseJSON"]["message"])
+            })
+        }
+    }
+
+</script>
+
+</html>

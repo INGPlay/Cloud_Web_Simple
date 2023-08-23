@@ -1,7 +1,7 @@
 package cloud.web.simple.board.restController;
 
 import cloud.web.simple.board.domain.BoardDto;
-import cloud.web.simple.board.domain.SearchBoardDto;
+import cloud.web.simple.board.domain.BoardFormDto;
 import cloud.web.simple.board.service.BoardService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,22 +24,28 @@ public class BoardRestController {
         return new ResponseEntity<>(boardService.findAllId(), HttpStatus.OK);
     }
 
-    @GetMapping("/board/{index}")
-    public ResponseEntity<BoardDto> findBoard(@PathVariable Integer index){
+    @GetMapping("/board/{id}")
+    public ResponseEntity<BoardDto> findBoard(@PathVariable Integer id){
 
-        return new ResponseEntity<>(boardService.findById(index), HttpStatus.OK);
+        return new ResponseEntity<>(boardService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping("/board")
-    public Integer insertBoard(@RequestBody BoardDto boardDto){
+    public Integer insertBoard(@RequestBody BoardFormDto boardDto){
 
         return boardService.insertBoard(boardDto);
     }
 
-    @DeleteMapping("/board/{index}")
-    public Integer deleteBoard(@PathVariable Integer index){
+    @PutMapping("/board")
+    public Integer updateBoard(@RequestBody BoardDto boardDto){
 
-        boardService.deleteBoardById(index);
-        return index;
+        return boardService.updateBoard(boardDto);
+    }
+
+    @DeleteMapping("/board/{id}")
+    public Integer deleteBoard(@PathVariable Integer id){
+
+        boardService.deleteBoardById(id);
+        return id;
     }
 }

@@ -1,6 +1,7 @@
 package cloud.web.simple.board.service;
 
 import cloud.web.simple.board.domain.BoardDto;
+import cloud.web.simple.board.domain.BoardFormDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +17,7 @@ class BoardServiceTest {
     @Test
     @Transactional
     void insertBoard() {
-        BoardDto boardDto = new BoardDto(1, "테스트제목", "테스트내용");
-        boardService.insertBoard(boardDto);
+        BoardFormDto boardFormDto = new BoardFormDto("테스트제목", "테스트내용");
+        boardService.insertBoard(boardFormDto);
     }
 }
