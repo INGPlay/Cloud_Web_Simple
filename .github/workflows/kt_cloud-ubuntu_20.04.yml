@@ -37,8 +37,8 @@ jobs:
       uses: kevin-leptons/ssh_action@v1
       with:
         # URI refers to remote host like `user@host`
-        host: ${{KT_CLOUD_REMOTE_HOST}}
+        host: ${{ KT_CLOUD_REMOTE_HOST }}
         # Private SSH key to authenticate
-        key: ${{KT_CLOUD_WEBKEY}}
+        key: ${{ KT_CLOUD_WEBKEY }}
         # Command to execute, Bash syntax
         command: ls -l
