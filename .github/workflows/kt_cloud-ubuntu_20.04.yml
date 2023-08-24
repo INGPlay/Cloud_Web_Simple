@@ -57,7 +57,14 @@ jobs:
         username: ${{ secrets.KT_CLOUD_USERNAME }}
         key: ${{ secrets.KT_CLOUD_WEBKEY }}
         port: ${{ secrets.PORT }}
-        script: ls
+        script: |
+          docker login
+          ${{ secrets.DOCKER_USERNAME }}
+          ${{ secrets.DOCKER_PASSWORD }}
+          docker stop $(docker ps -a -q) 
+          docker rm $(docker ps -a -q) 
+          docker pull ${{ secrets.DOCKER_REPOSITORY }}
+          docker run -d -p 8080:8080 ${{
 
     - name : test
       run : ls
