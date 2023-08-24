@@ -55,6 +55,9 @@ jobs:
       with:
         host: ${{ secrets.KT_CLOUD_HOST }}
         username: ${{ secrets.KT_CLOUD_USERNAME }}
-        passphrase: ${{ secrets.KT_CLOUD_WEBKEY }}
+        key: ${{ secrets.KT_CLOUD_WEBKEY }}
         port: ${{ secrets.PORT }}
         script: ls
+
+    - name : test
+      run : ls
