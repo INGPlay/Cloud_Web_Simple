@@ -5,7 +5,7 @@
 # This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Publishing-using-gradle
 
-name: Gradle Package
+name: CICD_ACTION_WITH_DOCKER
 
 on:
   push:
@@ -50,7 +50,7 @@ jobs:
     - name : Docker push
       run : docker push ${{ secrets.DOCKER_REPOSITORY }}
 
-    - name: executing remote ssh commands using password
+    - name: Remote SSH and Docker Pull private image and Docker Run
       uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.KT_CLOUD_HOST }}
