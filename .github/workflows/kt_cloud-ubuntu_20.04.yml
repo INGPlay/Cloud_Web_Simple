@@ -64,7 +64,7 @@ jobs:
           docker stop $(docker ps -a -q) 
           docker rm $(docker ps -a -q) 
           docker pull ${{ secrets.DOCKER_REPOSITORY }}
-          docker run -d -p 8080:8080 ${{
+          docker run -d -p 8080:8080 ${{ secrets.DOCKER_REPOSITORY }}
 
     - name : test
       run : ls
