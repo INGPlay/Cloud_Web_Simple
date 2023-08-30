@@ -1,9 +1,9 @@
-package cloud.web.simple.board.service;
+package cloud.web.simple.board;
 
 import cloud.web.simple.board.domain.BoardDto;
 import cloud.web.simple.board.domain.BoardFormDto;
-import cloud.web.simple.entity.Board;
-import cloud.web.simple.board.repository.BoardRepository;
+import cloud.web.simple.entity.board.Board;
+import cloud.web.simple.board.BoardRepository;
 import cloud.web.simple.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

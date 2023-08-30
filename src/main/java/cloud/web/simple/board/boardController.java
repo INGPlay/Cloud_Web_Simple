@@ -1,4 +1,4 @@
-package cloud.web.simple.board.controller;
+package cloud.web.simple.board;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

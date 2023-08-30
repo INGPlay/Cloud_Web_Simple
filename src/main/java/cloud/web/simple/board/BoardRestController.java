@@ -1,9 +1,8 @@
-package cloud.web.simple.board.restController;
+package cloud.web.simple.board;
 
 import cloud.web.simple.board.domain.BoardDto;
 import cloud.web.simple.board.domain.BoardFormDto;
-import cloud.web.simple.board.service.BoardService;
-import lombok.Getter;
+import cloud.web.simple.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
