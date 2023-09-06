@@ -56,7 +56,7 @@ jobs:
         host: ${{ secrets.KT_CLOUD_HOST }}
         username: ${{ secrets.KT_CLOUD_USERNAME }}
         key: ${{ secrets.KT_CLOUD_WEBKEY }}
-        port: ${{ secrets.PORT }}
+        port: ${{ secrets.KT_CLOUD_PORT }}
         script: |
           docker login
           ${{ secrets.DOCKER_USERNAME }}
