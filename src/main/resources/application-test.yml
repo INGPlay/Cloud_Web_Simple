@@ -1,0 +1,13 @@
+spring:
+    datasource:
+        url: jdbc:mariadb://172.27.0.210:3306/webdb
+        username: webuser
+        password: admin123
+        driver-class-name: org.mariadb.jdbc.Driver
+    jpa:
+        hibernate:
+            ddl-auto: create
+        properties:
+#                show_sql: true
+            default_batch_fetch_size: 1000    # 100??? ?? 1000? ??
+        database-platform: org.hibernate.dialect.MariaDB103Dialect
