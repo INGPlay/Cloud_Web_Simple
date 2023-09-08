@@ -79,6 +79,7 @@ jobs:
     - name : prod - Docker push
       run : docker push ${{ secrets.DOCKER_REPOSITORY }}
 
+    # Reboot 추가하여 재시작 시 잘 실행되는지 확인
     - name: prod - Remote SSH and Docker Pull private image and Docker Run
       uses: appleboy/ssh-action@v1.0.0
       with:
@@ -93,6 +94,7 @@ jobs:
           docker pull ${{ secrets.DOCKER_REPOSITORY }}
           docker run -d -p 8080:8080 ${{ secrets.DOCKER_REPOSITORY }}
           docker logout
+          reboot
         
 
     ### prod end !!!
