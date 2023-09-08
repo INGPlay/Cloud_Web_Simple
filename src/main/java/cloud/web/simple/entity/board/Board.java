@@ -1,4 +1,4 @@
-package cloud.web.simple.entity;
+package cloud.web.simple.entity.board;
 
 import lombok.AccessLevel;
 import lombok.Getter;

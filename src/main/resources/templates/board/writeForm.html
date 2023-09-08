@@ -10,6 +10,14 @@
 
 <body>
     <div class="container">
+
+        <div th:if="${#strings.isEmpty(id)}">
+            <h1>작성하기</h1>
+        </div>
+        <div th:unless="${#strings.isEmpty(id)}">
+            <h1>수정하기</h1>
+        </div>
+
         <form id="postForm">
 
             <div class="mb-3">

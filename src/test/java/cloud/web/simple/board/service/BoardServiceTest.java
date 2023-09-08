@@ -1,6 +1,6 @@
 package cloud.web.simple.board.service;
 
-import cloud.web.simple.board.domain.BoardDto;
+import cloud.web.simple.board.BoardService;
 import cloud.web.simple.board.domain.BoardFormDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
