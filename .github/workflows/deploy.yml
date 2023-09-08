@@ -11,6 +11,10 @@ on:
   push:
     branches: [ "deploy" ]
 
+env:
+  PROFILE_TEST : test
+  PROFILE_PROD : prod
+
 jobs:
   build:
     name: Deploy
@@ -47,7 +51,10 @@ jobs:
 
     ### test start !!!
     - name : test - Docker build
-      run : docker build -t ${{ secrets.DOCKER_REPOSITORY }} --build-arg PROFILE=test .
+      run : docker build -t ${{ secrets.DOCKER_REPOSITORY }} --build-arg PROFILE=$PROFILE_TEST .
+
+    - name : test - Docker push
+      run : docker push ${{ secrets.DOCKER_REPOSITORY }}
 
     - name: test - Remote SSH and Docker Pull private image and Docker Run
       uses: appleboy/ssh-action@v1.0.0
@@ -69,7 +76,10 @@ jobs:
 
     ### prod start !!!
     - name : prod - Docker build
-      run : docker build -t ${{ secrets.DOCKER_REPOSITORY }} --build-arg PROFILE=test .
+      run : docker build -t ${{ secrets.DOCKER_REPOSITORY }} --build-arg PROFILE=$PROFILE_PROD .
+
+    - name : prod - Docker push
+      run : docker push ${{ secrets.DOCKER_REPOSITORY }}
 
     - name: prod - Remote SSH and Docker Pull private image and Docker Run
       uses: appleboy/ssh-action@v1.0.0
@@ -87,8 +97,6 @@ jobs:
           docker pull ${{ secrets.DOCKER_REPOSITORY }}
           docker run -d -p 8080:8080 ${{ secrets.DOCKER_REPOSITORY }}
           docker logout
-          
-    - name : Prod Server - Docker push
-      run : docker push ${{ secrets.DOCKER_REPOSITORY }}
+        
 
     ### prod end !!!
