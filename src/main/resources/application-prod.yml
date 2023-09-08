@@ -6,6 +6,5 @@ spring:
         driver-class-name: org.mariadb.jdbc.Driver
     jpa:
         properties:
-#                show_sql: true
             default_batch_fetch_size: 1000    # 100??? ?? 1000? ??
         database-platform: org.hibernate.dialect.MariaDB103Dialect
