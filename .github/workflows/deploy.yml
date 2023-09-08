@@ -64,9 +64,7 @@ jobs:
         key: ${{ secrets.KT_CLOUD_WEBKEY }}
         port: ${{ secrets.KT_CLOUD_TEST_PORT }}
         script: |
-          docker login
-          ${{ secrets.DOCKER_USERNAME }}
-          ${{ secrets.DOCKER_PASSWORD }}
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker stop $(docker ps -a -q) 
           docker rm $(docker ps -a -q) 
           docker pull ${{ secrets.DOCKER_REPOSITORY }}
@@ -89,9 +87,7 @@ jobs:
         key: ${{ secrets.KT_CLOUD_WEBKEY }}
         port: ${{ secrets.KT_CLOUD_PROD_PORT }}
         script: |
-          docker login
-          ${{ secrets.DOCKER_USERNAME }}
-          ${{ secrets.DOCKER_PASSWORD }}
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker stop $(docker ps -a -q) 
           docker rm $(docker ps -a -q) 
           docker pull ${{ secrets.DOCKER_REPOSITORY }}
